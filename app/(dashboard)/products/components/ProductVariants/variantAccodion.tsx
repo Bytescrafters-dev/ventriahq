@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Trash2, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Store } from "@/types/store";
 import { CURRENCIES } from "@/shared/constants/common";
 
@@ -27,7 +27,6 @@ const VariantAccordionItem = ({
   isUnsaved,
   store,
   onUpdate,
-  onDelete,
 }: {
   variant: ProductVariant;
   index: number;
@@ -44,7 +43,7 @@ const VariantAccordionItem = ({
     setHasChanges(false);
   }, [variant]);
 
-  const updateVariant = (field: string, value: any) => {
+  const updateVariant = (field: string, value: unknown) => {
     if (field.includes(".")) {
       const [parent, child] = field.split(".");
       setEditedVariant((prev) => {
@@ -88,7 +87,7 @@ const VariantAccordionItem = ({
   const updatePrice = (
     index: number,
     field: keyof VariantPrice,
-    value: any,
+    value: VariantPrice[keyof VariantPrice],
   ) => {
     setEditedVariant((prev) => ({
       ...prev,

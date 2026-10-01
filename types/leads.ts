@@ -106,5 +106,9 @@ export interface Lead {
   assignedToId: string | null;
   createdAt: string;
   updatedAt: string;
-  assignedTo: any;
+  assignedTo: {
+    id: string;
+    firstName: string | null;
+    lastName: string | null;
+  } | null;
 }

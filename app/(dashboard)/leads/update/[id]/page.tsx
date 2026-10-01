@@ -5,7 +5,7 @@ import { ChevronLeft, Loader2Icon, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { set, z } from "zod";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
@@ -74,23 +74,22 @@ const UpdateLeadPage = () => {
   const [status, setStatus] = useState<LEAD_STATUS>(LEAD_STATUS.NEW);
   const [source, setSource] = useState<LEAD_CAMPAIGN>(LEAD_CAMPAIGN.OTHER);
 
-  const { register, handleSubmit, reset, watch, setValue, getValues } =
-    useForm<Form>({
-      resolver: zodResolver(schema),
-      defaultValues: {
-        fullName: "",
-        phone: "",
-        email: "",
-        address1: "",
-        address2: "",
-        city: "",
-        state: "",
-        country: "",
-        postalCode: "",
-        note: "",
-        followUpDate: "",
-      },
-    });
+  const { register, handleSubmit, reset, watch, setValue } = useForm<Form>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      fullName: "",
+      phone: "",
+      email: "",
+      address1: "",
+      address2: "",
+      city: "",
+      state: "",
+      country: "",
+      postalCode: "",
+      note: "",
+      followUpDate: "",
+    },
+  });
 
   const { data, isLoading, isError: loadingLeadError } = useLead(leadId);
 
@@ -116,7 +115,7 @@ const UpdateLeadPage = () => {
       setProductSKUs(data.productSKUs ?? []);
       setAssignedToId(data.assignedToId ?? undefined);
     }
-  }, [data]);
+  }, [data, reset]);
 
   const onSubmit = async (values: Form) => {
     const {

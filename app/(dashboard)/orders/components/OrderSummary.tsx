@@ -51,7 +51,7 @@ const getPaymentStatusOptions = (value: OrderStatus) => {
         { label: "Paid", value: PaymentStatus.PAID },
       ];
     case OrderStatus.CANCELED:
-      [
+      return [
         { label: "Unpaid", value: PaymentStatus.UNPAID },
         { label: "Cash on Delivery", value: PaymentStatus.COD },
         { label: "Paid", value: PaymentStatus.PAID },

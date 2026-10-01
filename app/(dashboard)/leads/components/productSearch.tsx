@@ -9,8 +9,6 @@ import { useDebounce } from "use-debounce";
 import { useSeachProducts } from "@/hooks/useProducts";
 import { productSearchVariant, ProductsSearch } from "@/types/product";
 
-type LineInputs = Record<string, { qty: string; cost: string }>;
-
 interface Props {
   lines: string[];
   onAddLine: (sku: string) => void;
@@ -23,7 +21,6 @@ export const ProductSearch = ({ lines, onAddLine }: Props) => {
   const [selectedProduct, setSelectedProduct] = useState<ProductsSearch | null>(
     null,
   );
-  const [lineInputs, setLineInputs] = useState<LineInputs>({});
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, isError } = useSeachProducts(debouncedSearch);
@@ -76,7 +73,6 @@ export const ProductSearch = ({ lines, onAddLine }: Props) => {
               setShowDropdown(true);
               if (!e.target.value) {
                 setSelectedProduct(null);
-                setLineInputs({});
               }
             }}
             onFocus={() => {

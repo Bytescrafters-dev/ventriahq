@@ -186,7 +186,7 @@ const ProductVariants = ({ productId }: ProductVariantsProps) => {
       await createVariants({ variants: generatedVariants });
       setGeneratedVariants([]);
       setShowGenerator(false);
-    } catch (error) {
+    } catch {
       // Error handled in hook
     }
   };
@@ -217,7 +217,7 @@ const ProductVariants = ({ productId }: ProductVariantsProps) => {
     }
     try {
       await deleteVariant(variantId);
-    } catch (error) {
+    } catch {
       // Error handled in hook
     }
   };
@@ -245,7 +245,7 @@ const ProductVariants = ({ productId }: ProductVariantsProps) => {
         variantId: updatedVariant.id!,
         data: updatedVariant,
       });
-    } catch (error) {
+    } catch {
       // Error handled in hook
     }
   };
@@ -289,7 +289,7 @@ const ProductVariants = ({ productId }: ProductVariantsProps) => {
   const updateTemplatePrice = (
     index: number,
     field: keyof VariantPrice,
-    value: any,
+    value: VariantPrice[keyof VariantPrice],
   ) => {
     setMasterTemplate((prev) => ({
       ...prev,

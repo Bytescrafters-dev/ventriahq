@@ -38,11 +38,6 @@ export const StaffFilters = () => {
     updateParams({ q: debouncedSearch || null });
   }, [debouncedSearch]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const clearAll = () => {
-    setSearchInput("");
-    router.replace(pathname);
-  };
-
   return (
     <div className="space-y-3">
       <div className="relative">

@@ -99,7 +99,7 @@ const UpdateStaffMember = () => {
       const storeIds = profile.adminStores.map((store) => store.store.id);
       setStoreIds(storeIds);
     }
-  }, [profile]);
+  }, [profile, reset]);
 
   const { data, isLoading, isError: storesError } = useStores();
 

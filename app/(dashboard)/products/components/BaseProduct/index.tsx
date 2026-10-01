@@ -22,7 +22,6 @@ const ProductBasicForm = ({
   active,
   setActive,
   onSubmit,
-  isPending,
 }: {
   title: string;
   setTitle: (value: string) => void;

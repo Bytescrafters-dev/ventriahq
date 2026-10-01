@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Store } from "@/types/store";
@@ -14,7 +14,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function StoreDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { data: store, isLoading, isError } = useStore(id);
+  const { data: store, isLoading } = useStore(id);
   const { updateStore, isUpdating, isUpdatingError } = useUpdateStore();
 
   const handleSave = async (updated: Partial<Store>) => {

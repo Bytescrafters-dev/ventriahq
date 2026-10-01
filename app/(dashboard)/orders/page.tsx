@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Suspense } from "react";
 import {
   Table,
@@ -12,8 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
-import { useDeleteSupplier } from "@/hooks/useSuppliers";
-import { toast } from "sonner";
 import { IconPlus } from "@tabler/icons-react";
 import { useOrders } from "@/hooks/useOrders";
 import { OrderStatus, PaymentStatus } from "@/types/order";
@@ -68,12 +65,6 @@ const OrdersContent = () => {
   const status = searchParams.get("status") ?? undefined;
   const paymentStatus = searchParams.get("paymentStatus") ?? undefined;
 
-  const [deleteDialog, setDeleteDialog] = useState({
-    isOpen: false,
-    supplierId: "",
-    supplierName: "",
-  });
-
   const { data, isLoading, error } = useOrders({
     page,
     limit: LIMIT,
@@ -81,30 +72,6 @@ const OrdersContent = () => {
     status: status as OrderStatus,
     paymentStatus: paymentStatus as PaymentStatus,
   });
-  const {
-    mutateAsync: deleteSupplier,
-    isPending,
-    isError,
-  } = useDeleteSupplier();
-
-  const handleDeleteClick = (supplierId: string, supplierName: string) => {
-    setDeleteDialog({ isOpen: true, supplierId, supplierName });
-  };
-
-  const handleDeleteConfirm = async () => {
-    try {
-      await deleteSupplier(deleteDialog.supplierId);
-      setDeleteDialog({ isOpen: false, supplierId: "", supplierName: "" });
-      toast.success("Supplier deleted successfully");
-    } catch {}
-  };
-
-  useEffect(() => {
-    if (isError) {
-      toast.error("Failed to delete supplier!");
-    }
-  }, [isError]);
-
   const setPage = (next: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", next.toString());
@@ -255,16 +222,6 @@ const OrdersContent = () => {
           </div>
         </div>
       )}
-      {/* <DeleteDialog
-        isOpen={deleteDialog.isOpen}
-        onOpenChange={() =>
-          setDeleteDialog({ isOpen: false, supplierId: "", supplierName: "" })
-        }
-        isLoading={isPending}
-        onConfirm={handleDeleteConfirm}
-        title="Delete Supplier"
-        description={`Are you sure you want to delete "${deleteDialog.supplierName}"? This action cannot be undone.`}
-      /> */}
     </>
   );
 };

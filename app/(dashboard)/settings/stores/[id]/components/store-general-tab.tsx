@@ -37,28 +37,22 @@ export function StoreGeneralTab({
   onSave: (updated: Partial<Store>) => void;
   isUpdating?: boolean;
 }) {
-  const [uploadState, setForm] = useState<Store>(store);
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
   } = useForm<StoreForm>({
     resolver: zodResolver(storeSchema),
   });
 
   const [logoPreview, setLogoPreview] = useState<string | null>(store.logoUrl);
 
-  const set = (field: keyof Store, value: string) =>
-    setForm((prev) => ({ ...prev, [field]: value }));
-
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const url = URL.createObjectURL(file);
     setLogoPreview(url);
-    set("logoUrl", url);
   };
 
   useEffect(() => {
@@ -69,7 +63,7 @@ export function StoreGeneralTab({
       setValue("timezone", store.timezone ?? "");
       setValue("supportEmail", store.supportEmail ?? "");
     }
-  }, [store]);
+  }, [store, setValue]);
 
   const onSubmit = (values: StoreForm) => {
     const updatedtore = {

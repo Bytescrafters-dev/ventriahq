@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
-import { useCreateStore } from "@/hooks/useStores";
+import { StoreCreateInput, useCreateStore } from "@/hooks/useStores";
 import { ChevronLeft } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StoreGeneralTab } from "./components/store-general-tab";
@@ -14,7 +14,7 @@ const CreateStore = () => {
 
   const { mutateAsync: createStore, isPending, isError } = useCreateStore();
 
-  const onSave = async (data: any) => {
+  const onSave = async (data: StoreCreateInput) => {
     try {
       await createStore(data);
       toast.success("Store created successfully!");

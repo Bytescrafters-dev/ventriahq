@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Store } from "@/types/store";
+import { useState } from "react";
+import { StoreCreateInput } from "@/hooks/useStores";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,7 +33,7 @@ export function StoreGeneralTab({
   onSave,
   isCreating,
 }: {
-  onSave: (updated: Partial<Store>) => void;
+  onSave: (data: StoreCreateInput) => void;
   isCreating?: boolean;
 }) {
   //const [uploadState, setForm] = useState<Store>(store);
@@ -42,7 +42,6 @@ export function StoreGeneralTab({
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
   } = useForm<StoreForm>({
     resolver: zodResolver(storeSchema),
     defaultValues: {

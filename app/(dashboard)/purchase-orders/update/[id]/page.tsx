@@ -312,7 +312,7 @@ const UpdatePurchaseOrderPage = () => {
       <DeleteDialog
         isOpen={rejectDialog.isOpen}
         onOpenChange={() => setRejectDialog({ isOpen: false })}
-        isLoading={false}
+        isLoading={rejectPending}
         onConfirm={handleRejectConfirm}
         title="Delete Purchase Order"
         description={`Are you sure you want to reject "${purchaseOrder?.orderNumber}"? This action cannot be undone.`}

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Store } from "@/types/store";
 import { getErrorMessage } from "@/lib/utils";
 
-interface StoreCreateInput {
+export interface StoreCreateInput {
   name: string;
   slug: string;
   domain?: string;

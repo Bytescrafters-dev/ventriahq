@@ -1,30 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
 import {
   Table,
-  TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
-import { useDeleteSupplier, useSuppliers } from "@/hooks/useSuppliers";
-import { Edit, Trash2 } from "lucide-react";
-import DeleteDialog from "@/components/delete-confirmation-dialog";
-import { toast } from "sonner";
 
 const ViewStaffPage = () => {
-  const [page, setPage] = useState(1);
-  const limit = 10;
-  const [deleteDialog, setDeleteDialog] = useState({
-    isOpen: false,
-    supplierId: "",
-    supplierName: "",
-  });
-
   return (
     <div className="p-4 md:p-8">
       <div className="mb-6">

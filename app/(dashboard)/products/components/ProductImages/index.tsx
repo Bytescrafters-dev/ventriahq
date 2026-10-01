@@ -29,6 +29,7 @@ import {
 } from "@/hooks/useProductImages";
 import { Skeleton } from "@/components/ui/skeleton";
 import DeleteDialog from "@/components/delete-confirmation-dialog";
+import { ProductImage } from "@/types/productImage";
 
 interface ProductImagesProps {
   productId?: string;
@@ -37,7 +38,7 @@ interface ProductImagesProps {
 const ProductImages = ({ productId }: ProductImagesProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteImageId, setDeleteImageId] = useState<string | null>(null);
-  const [localImages, setLocalImages] = useState<any[]>([]);
+  const [localImages, setLocalImages] = useState<ProductImage[]>([]);
 
   const { data: images = [], isLoading } = useProductImages(productId || "");
   const uploadMutation = useUploadProductImage();

@@ -2,11 +2,8 @@
 
 import React from "react";
 import {
-  IconChartBar,
   IconDashboard,
-  IconFolder,
   IconListDetails,
-  IconUsers,
   IconBallVolleyball,
   IconUsersPlus,
   IconPackages,

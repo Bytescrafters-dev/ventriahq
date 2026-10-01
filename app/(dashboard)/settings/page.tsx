@@ -2,13 +2,11 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { SETTINGS_STORE } from "@/shared/constants/pageUrls";
 import Link from "next/link";
 import {
   IconBuildingStore,
   IconUsers,
   IconChevronRight,
-  IconShieldLock,
 } from "@tabler/icons-react";
 
 const SETTINGS_ITEMS = [

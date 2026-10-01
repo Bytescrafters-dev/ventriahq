@@ -10,10 +10,8 @@ import { CustomerDetailsForm } from "../../components/CustomerDetailsForm";
 import { OrderItemsSearch } from "../../components/OrderItemsSearch";
 import { OrderItemsTable } from "../../components/OrderItemsTable";
 import { OrderSummary } from "../../components/OrderSummary";
-import { useCreateOrder, useOrder, useUpdateOrder } from "@/hooks/useOrders";
-import { useCurrentStore } from "@/contexts/storeProvider";
+import { useOrder, useUpdateOrder } from "@/hooks/useOrders";
 import {
-  CreateOrderInput,
   OrderItem,
   OrderStatus,
   PaymentStatus,
@@ -110,6 +108,8 @@ const UpdateOrderPage = () => {
         setItems(orderItems);
       }
     }
+    // Re-sync the form on every fetch (including refetch after a failed update), not only when data changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataUpdatedAt]);
 
   const handleAddItem = (item: OrderItem) => {
@@ -189,7 +189,7 @@ const UpdateOrderPage = () => {
       toast.error(error.message || "Failed to update order");
       refetch();
     }
-  }, [isError, fetchingError]);
+  }, [isError, fetchingError, error, refetch]);
 
   const canEditCustomerDetails =
     status === OrderStatus.PENDING || status === OrderStatus.CONFIRMED;

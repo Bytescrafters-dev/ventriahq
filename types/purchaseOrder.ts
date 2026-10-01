@@ -1,12 +1,22 @@
+import { Supplier } from "./supplier";
+
+interface PurchaseOrderActor {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface PurchaseOrderListItem {
   id: string;
   storeId: string;
   status: string;
-  supplier: any;
-  createdBy: any;
+  supplier: Supplier;
+  createdBy: PurchaseOrderActor | null;
   orderNumber: string;
   expectedDeliveryDate: string;
-  _count: any;
+  _count: {
+    lines: number;
+  };
 }
 
 export interface PurchaseOrderLine {
@@ -26,8 +36,8 @@ export interface PurchaseOrderLine {
 }
 
 export interface PurchaseOrder extends Omit<PurchaseOrderListItem, "_count"> {
-  receivedBy: any;
-  rejectedBy: any;
+  receivedBy: PurchaseOrderActor | null;
+  rejectedBy: PurchaseOrderActor | null;
   invoiceRef: string;
   note: string;
   currency: string;

@@ -30,8 +30,8 @@ export const useLogin = () => {
         await response.json();
 
       return { success: data.ok, mustChangePassword: data.mustChangePassword };
-    } catch (err: any) {
-      setError(err?.message ?? "Failed to login!");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to login!");
     } finally {
       setLoading(false);
     }
@@ -56,8 +56,8 @@ export const useLogin = () => {
 
       queryClient.clear();
       return true;
-    } catch (err: any) {
-      setError(err?.message ?? "Failed to logout!");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to logout!");
     } finally {
       setLoading(false);
     }

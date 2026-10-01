@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import Cropper from "react-easy-crop";
+import Cropper, { Area } from "react-easy-crop";
 import {
   Dialog,
   DialogContent,
@@ -15,17 +15,13 @@ import { toast } from "sonner";
 
 async function getCroppedImg(
   imageSrc: string,
-  crop: any,
-  zoom: number,
+  crop: Area,
 ): Promise<Blob> {
   const image = await createImage(imageSrc);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d")!;
 
-  const naturalWidth = image.naturalWidth;
-  const naturalHeight = image.naturalHeight;
-
-  const scale = naturalWidth / image.width;
+  const scale = image.naturalWidth / image.width;
 
   const croppedWidth = crop.width * scale;
   const croppedHeight = crop.height * scale;
@@ -82,9 +78,9 @@ export function AvatarUploader({
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
-  const onCropComplete = useCallback((_: any, croppedAreaPixels: any) => {
+  const onCropComplete = useCallback((_: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
@@ -99,7 +95,7 @@ export function AvatarUploader({
   async function uploadCropped() {
     if (!imageSrc || !croppedAreaPixels) return;
 
-    const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels, zoom);
+    const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
     const formData = new FormData();
     formData.append("avatar", croppedBlob, "avatar.jpg");
 

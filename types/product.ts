@@ -30,7 +30,9 @@ export interface Product {
   images?: ProductImage[];
   options?: ProductOption[];
   variants?: ProductVariant[];
-  _count: any;
+  _count: {
+    variants: number;
+  };
 }
 
 export interface VariantMasterTemplate {

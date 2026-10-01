@@ -32,7 +32,7 @@ export interface OrderResponseItem {
   variantTitle: string;
   unitPrice: number;
   quantity: number;
-  options: any;
+  options: Record<string, string> | null;
 }
 
 export interface CreateOrderInput {

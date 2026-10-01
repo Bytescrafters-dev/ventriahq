@@ -23,7 +23,7 @@ const ImportLeadsPage = () => {
   const invalidRows = rows.filter((r) => r.errors.length > 0);
   const hasParsed = rows.length > 0;
 
-  const { mutateAsync: createLeads, isPending, isError } = useBulkCreateLeads();
+  const { mutateAsync: createLeads } = useBulkCreateLeads();
 
   const handleFile = async (file: File) => {
     setErrors([]);
@@ -215,7 +215,7 @@ const ImportLeadsPage = () => {
       </div>
       {errors.length > 0 &&
         errors.map((error) => (
-          <div className="py-4">
+          <div className="py-4" key={error.row}>
             <div className="text-red-500">{`Error at row ${error.row}: ${error.reason}`}</div>
           </div>
         ))}

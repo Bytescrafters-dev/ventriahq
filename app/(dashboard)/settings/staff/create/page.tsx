@@ -142,7 +142,9 @@ const CreateStaffMember = () => {
 
   useEffect(() => {
     if (currentStore) {
-      handleAddStore(currentStore);
+      setStoreIds((prev) =>
+        prev.includes(currentStore.id) ? prev : [...prev, currentStore.id],
+      );
     }
   }, [currentStore]);
 

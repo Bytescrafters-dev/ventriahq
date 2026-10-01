@@ -25,7 +25,7 @@ type Props = {
   updateTemplatePrice: (
     index: number,
     field: keyof VariantPrice,
-    value: any,
+    value: VariantPrice[keyof VariantPrice],
   ) => void;
   removePriceFromTemplate: (index: number) => void;
   generateVariantsFromOptions: () => void;
@@ -43,7 +43,6 @@ const VariantMasterTemplateCard = ({
   updateTemplatePrice,
   removePriceFromTemplate,
   generateVariantsFromOptions,
-  options,
   generatedVariants,
   copyTemplateToAll,
   handleCreateVariants,
@@ -66,7 +65,7 @@ const VariantMasterTemplateCard = ({
               <Input
                 value={masterTemplate.skuPattern}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     skuPattern: e.target.value,
                   }))
@@ -79,7 +78,7 @@ const VariantMasterTemplateCard = ({
               <Input
                 value={masterTemplate.titlePattern}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     titlePattern: e.target.value,
                   }))
@@ -92,7 +91,7 @@ const VariantMasterTemplateCard = ({
               <Input
                 value={masterTemplate.barcodePattern}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     barcodePattern: e.target.value,
                   }))
@@ -174,7 +173,7 @@ const VariantMasterTemplateCard = ({
                 inputMode="decimal"
                 value={masterTemplate.weightGrams}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     weightGrams: parseInt(e.target.value) || 0,
                   }))
@@ -188,7 +187,7 @@ const VariantMasterTemplateCard = ({
                 inputMode="decimal"
                 value={masterTemplate.lengthCm}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     lengthCm: parseInt(e.target.value) || 0,
                   }))
@@ -202,7 +201,7 @@ const VariantMasterTemplateCard = ({
                 inputMode="decimal"
                 value={masterTemplate.widthCm}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     widthCm: parseInt(e.target.value) || 0,
                   }))
@@ -216,7 +215,7 @@ const VariantMasterTemplateCard = ({
                 inputMode="decimal"
                 value={masterTemplate.heightCm}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     heightCm: parseInt(e.target.value) || 0,
                   }))
@@ -252,7 +251,7 @@ const VariantMasterTemplateCard = ({
                 inputMode="decimal"
                 value={masterTemplate.inventory.lowStockThreshold}
                 onChange={(e) =>
-                  setMasterTemplate((prev: any) => ({
+                  setMasterTemplate((prev) => ({
                     ...prev,
                     inventory: {
                       ...prev.inventory,

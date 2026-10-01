@@ -78,14 +78,7 @@ export const useLeads = ({
     queryKey: [
       "leads",
       currentStore?.id,
-      page,
-      limit,
-      status,
-      q,
-      source,
-      dateType,
-      dateFrom,
-      dateTo,
+      { page, limit, status, q, source, dateType, dateFrom, dateTo },
     ],
     queryFn: async (): Promise<LeadsResponse> => {
       if (!currentStore?.id) {

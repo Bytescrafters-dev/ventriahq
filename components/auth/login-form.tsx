@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import { Loader2Icon } from "lucide-react";
-import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircleIcon } from "lucide-react";
 import PasswordInput from "../common/PasswordInput";
 
@@ -84,7 +84,7 @@ export const LoginForm = ({ nextPath = "/" }: { nextPath?: string }) => {
         {error && (
           <Alert variant="destructive">
             <AlertCircleIcon />
-            <AlertTitle>{error}</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
       </div>

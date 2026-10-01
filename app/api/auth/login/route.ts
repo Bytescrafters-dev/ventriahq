@@ -3,7 +3,6 @@ import { setAuthCookies } from "@/lib/cookies";
 import { env } from "@/lib/env";
 
 export const POST = async (req: Request) => {
-  console.log("called login api");
   const body = await req.json();
 
   try {
@@ -13,12 +12,11 @@ export const POST = async (req: Request) => {
       body: JSON.stringify(body),
     });
 
-    console.log(res);
-
     if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
       return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 401 },
+        { message: data?.message ?? "Failed to login" },
+        { status: res.status },
       );
     }
 
@@ -26,8 +24,6 @@ export const POST = async (req: Request) => {
     const access = data?.access;
     const refresh = data?.refresh;
     const mustChangePassword = data?.mustChangePassword;
-
-    console.log(data);
 
     if (!(access && refresh)) {
       return NextResponse.json(

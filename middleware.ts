@@ -1,8 +1,9 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { env } from "@/lib/env";
 
-const JWT_COOKIE = env.JWT_COOKIE_NAME;
+// Read directly instead of importing lib/env: the middleware only needs the
+// cookie name and must not crash every request when BACKEND_URL is missing.
+const JWT_COOKIE = process.env.JWT_COOKIE_NAME || "platform_jwt";
 const PROTECTED = ["/", "/products", "/admins", "/my-profile"];
 
 export const middleware = (req: NextRequest) => {
